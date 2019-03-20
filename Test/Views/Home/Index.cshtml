@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product App</title>
+</head>
+<body>
+
+<div>
+    <h2>Search by ID</h2>
+    <input type="text" id="link" size="5" />
+    <input type="button" value="Search" onclick="find();" />
+    <p id="product" />
+</div>
+
+<h2>Все ссылки</h2>
+<div class = 'links'>
+</div>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script>
+    var uri = 'api/links';
+
+    $(document).ready(function () {
+        $.getJSON(uri)
+            .done(function (data) {
+                $.each(data, function (key, item) {
+                    $('<div/>',
+                        {
+                            id: '122',
+                            class: 'some-class',
+                            title: 'now this div has a title!'
+                        }).appendTo($('#links'));
+                    //$('<div class>', { text: formatItem(item) }).appendTo($('#links'));
+                });
+            });
+    });
+
+    function formatItem(item) {
+        return 'Оригинальная ссылка:' + item.Url + ' Сокращенная:' + window.location.protocol + "//" + window.location.host + "/" + item.ShortUrl + ' Переходов:' + item.Count;
+    }
+
+    function find() {
+        var data = {
+            url : $('#link').val()
+    };
+        $.post(uri,data)
+            .done(function (data) {
+                alert(data);
+                $('#product').text(formatItem(data));
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                $('#product').text('Error: ' + err);
+            });
+    }
+</script>
+</body>
+</html>
