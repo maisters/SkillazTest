@@ -6,8 +6,8 @@ namespace Test.Repositories
 {
     public interface ILinksRepository : IMongoRepository<Link>
     {
-        Task<Link> getByShortUrl(string shortUrl);
-        Task<Link> getByUrl(string clientId, string url);
+        Task<Link> GetByShortUrl(string shortUrl);
+        Task<Link> GetByUrl(string clientId, string url);
         Task<IEnumerable<Link>> GetClientsUrls(string id);
     }
 }

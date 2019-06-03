@@ -17,7 +17,7 @@ namespace Test.Services
 
         public async Task<Link> GetUrl(string shortUrl)
         {
-            var link = await _linksRepository.getByShortUrl(shortUrl) 
+            var link = await _linksRepository.GetByShortUrl(shortUrl) 
                        ?? throw new ArgumentException("Ссылка не найдена");
             link.Count++;
             await _linksRepository.Update(link);
@@ -32,7 +32,7 @@ namespace Test.Services
 
         public async Task<Link> Create(string clientId, string url)
         {
-            var link = await _linksRepository.getByUrl(clientId, url);
+            var link = await _linksRepository.GetByUrl(clientId, url);
             
             if (link != null)
             {

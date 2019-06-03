@@ -7,13 +7,13 @@ namespace Test.Repositories
 {
     public class LinksRepository : MongoRepository<Link>,ILinksRepository
     {
-        public async Task<Link> getByShortUrl(string shortUrl)
+        public async Task<Link> GetByShortUrl(string shortUrl)
         {
             var shortUrlFilter = Builders<Link>.Filter.Eq(a => a.ShortUrl, shortUrl);
             return  await _context.GetCollection<Link>().Find(shortUrlFilter).SingleOrDefaultAsync();
         }
 
-        public async Task<Link> getByUrl(string clientId, string url)
+        public async Task<Link> GetByUrl(string clientId, string url)
         {
             var urlFilter = Builders<Link>.Filter.Eq(a => a.Url, url);
             var clientIdFilter = Builders<Link>.Filter.Eq(a => a.ClientID, clientId);
